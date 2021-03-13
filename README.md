@@ -1,10 +1,10 @@
-# Midterm Project - ROBT 407
-#### Group memebers: Danissa Sandykbayeva, Karina Burunchina
+# Linear and Logistic Regression Project (+ MNIST digit recognition test)
+### Project collaborators: Danissa Sandykbayeva, Karina Burunchina
 
-## Task 1. Linear Regression
+## 1. Linear Regression
 
-Task advised by Karina mostly. Danissa improved the function 'error' and made the scatter plots of E_lin and E_pocket. 
-Firstly, we thought that it is possible to divide tasks. After the e-mail, we continued on our project together working on the tasks. So, 1-2 Tasks were done mostly individually, whilst 3-4 tasks - in team.
+**Level of collaboration: This part was advised by Karina mostly. Danissa improved the function 'error' and made the scatter plots of E_lin and E_pocket. 
+So, 1-2 Parts were done mostly individually, whilst 3-4 Parts - in team.**
 
 1.0. First of all we implement all of the necessary packages and internal function
 
@@ -93,7 +93,7 @@ plt_dataset (x, w, b, y)
 ```
 
 
-![png](output_6_0.png)
+![png](/README_images/output_6_0.png)
 
 
 
@@ -106,7 +106,7 @@ plt_dataset (x, w, b, y)
 ```
 
 
-![png](output_7_0.png)
+![png](/README_images/output_7_0.png)
 
 
 1.3. Now we are defining the class and functions for the Pocket Learning Algorithm.The algorithm eventually performs the same process as a regular Perceptron, but with each iteration it stores the best performing weights as the 'pocket' weights and at the end returns the best weights as the solution of the learning algorithm
@@ -184,7 +184,7 @@ p.results(x, y)
     
 
 
-![png](output_11_1.png)
+![png](/README_images/output_11_1.png)
 
 
 1.5. Defining the class and its functions for the Linear Regression Algorithm
@@ -236,7 +236,7 @@ l.results(x, y)
     
 
 
-![png](output_15_1.png)
+![png](/README_images/output_15_1.png)
 
 
 Considering two graphs above Linear Regression fits the original hypothesis better than the PLA.
@@ -314,7 +314,7 @@ plt.show()
 ```
 
 
-![png](output_21_0.png)
+![png](/README_images/output_21_0.png)
 
 
 It is little hard to see but both errors are almost the same. To make this a little more understandable we could instead calculate the mean difference between the two:
@@ -329,11 +329,11 @@ print(np.sum(np.abs(E_lin-E_pocket))/100)
 
 Judging from the results presented above, both algorithm have very similar performance quality in terms of the error. However, when running the iterations it is very noticable how much more time-consuming Pocket Algorithm is in comparison with Linear Regression. Therefore, based on those findings we would highly recommend Linear Regression Algorithm to be used  on this dataset.
 
-## Task 2. Logistic Regression and Gradient Descent
+## 2. Logistic Regression and Gradient Descent
 
-Task 2 was fully designed by Danissa.
+**Level of collaboration: Part 2 was fully designed by Danissa.**
 
-2.1. Now we can use it for the actual calculation of the $\nabla E^{(n)}(w)$ and defining the fundamental function for the logistic regression. $\nabla E^{(n)}(w)$ uses the formula of the derivative of the $E^{(n)}(w)$: $\nabla E^{(n)}(w)=\theta(-y_nw^Tx_n)(-y_nx_n)$
+2.1. Now we can use it for the actual calculation of the delta E^n(w) and defining the fundamental function for the logistic regression. delta E^n(w) uses the formula of the derivative of the E^n(w): delta E^n(w)=theta(-y_n\*w^T\*x_n)(-y_n\*x_n)
 
 
 ```python
@@ -361,7 +361,7 @@ def delta_E(data,labels,w,d):
     return dE_in    
 ```
 
-2.2. The next function we will need is the function that will prepare a set of labels of -1 or +1 for each OVA binary classification task. We use the mathematical property of $-1^0=1$ and $-1^1=-1$ to make it more automatic, where power of 1 would be if the event of the current label being equal to the current ONE class in Ove-Versus-All classification, and 0 if this event is false:
+2.2. The next function we will need is the function that will prepare a set of labels of -1 or +1 for each OVA binary classification task. We use the mathematical property of -1^0=1 and -1^1=-1 to make it more automatic, where power of 1 would be if the event of the current label being equal to the current ONE class in Ove-Versus-All classification, and 0 if this event is false:
 
 
 ```python
@@ -393,7 +393,7 @@ def mult_ult(classes_names,labels):
     return y_multiclass
 ```
 
-2.3. Next we build a Logistic regression learning algorithm itself according to the previous lectures and the project manual using previous formula for $\nabla E^{(n)}(w)$ to correct the weights vector in each iteration.
+2.3. Next we build a Logistic regression learning algorithm itself according to the previous lectures and the project manual using previous formula for delta E^n(w) to correct the weights vector in each iteration.
 
 We also changed the 'randomly pick one n from {1,2,...,N} for each iteration'(it is commented out in the code below) part because it has proven itself to be very inefficient, since the training set that is actually used in the process of learning becomes smaller that the original. Since randomly picking n might result in often iterations over the same samples and is not enough for training to be successful.
 
@@ -547,14 +547,14 @@ plt.show()
     
 
 
-![png](output_35_1.png)
+![png](/README_images/output_35_1.png)
 
 
 From the graph above it could be seen that the in-sample error very quickly approaches smaller values, which are closer to 0, therefore taking around 500-1000 epoch should be enough for a good result in testing.
 
-## Task 3. Practical Design of Learning Algorithms
+## 3. Practical Design of Learning Algorithms
 
-Task 3 was firstly designed by Danissa, also Danissa integrated to the functions logistic regression model. Karina - linear regression model. Then the Validation curves were coded by Danissa, the GridSearchCV integrated and tested by Karina.
+**Level of collaboration: Part 3 was firstly designed by Danissa, also Danissa integrated to the functions logistic regression model. Karina - linear regression model. Then the Validation curves were coded by Danissa, the GridSearchCV integrated and tested by Karina.**
 
 We start by downloading the dataset that is going to be used the task
 
@@ -864,9 +864,9 @@ folds_train('lin_reg',X,y,20)
     Average error: 0.041000000000000016
     
 
-Interestingly, this doesn't quite work the same with the Linear Regression case. This probably ust indicates that the model is trying to fit the $E_{val}$ to the shape of $E_{test}$ but from the above of the curve. However, we can also now compare the two and see that $E_{val}$ is evidently smaller for the Logistic Regression case, but it takes a lot more time to estimate in comparison to Linear Regression because of the different nature of those algorithms
+Interestingly, this doesn't quite work the same with the Linear Regression case. This probably ust indicates that the model is trying to fit the E(validation) to the shape of E(test) but from the above of the curve. However, we can also now compare the two and see that E(validation) is evidently smaller for the Logistic Regression case, but it takes a lot more time to estimate in comparison to Linear Regression because of the different nature of those algorithms
 
-3.4 The last validation is the Leave-One-Out Cross Validation. Which makes 1 point to be the validation set and N-1 points to be the training set. It is known to be the most reliable in estimating $E_{val}$ to be close to actual $E_{test}$ since each $e_{in}$ in this validation is an unibased estimate for $E_{test}(g_n)$. But there is also a price to pay in terms of the computational power it is taking to actually run this.
+3.4 The last validation is the Leave-One-Out Cross Validation. Which makes 1 point to be the validation set and N-1 points to be the training set. It is known to be the most reliable in estimating E(validation) to be close to actual E(test) since each e(in) in this validation is an unibased estimate for E(test)[g_n]. But there is also a price to pay in terms of the computational power it is taking to actually run this.
 
 
 ```python
@@ -958,9 +958,9 @@ loocv('lin_reg',X,y)
     Average error: 0.055
     
 
-Firstly, Linear regression obviously performs way faster than Logistic regression does. Secondly, assuming that for Leave-One-Out validation $E_{val}$ is pretty close to actual $E_{test}$, we can conclude that Linear Regression also performs with better accuracy and precision.
+Firstly, Linear regression obviously performs way faster than Logistic regression does. Secondly, assuming that for Leave-One-Out validation E(validation) is pretty close to actual E(test), we can conclude that Linear Regression also performs with better accuracy and precision.
 
-3.5. Using GridSearchCV and learning curve() we are now analyzing each algorithm's dependence on the parameters, and performing cross-validation with various test sizes with the corresponding validation error. This would give us a good estimate of how well each model approximates $E_{val}$ to $E_{test}$
+3.5. Using GridSearchCV and learning curve() we are now analyzing each algorithm's dependence on the parameters, and performing cross-validation with various test sizes with the corresponding validation error. This would give us a good estimate of how well each model approximates E(validation) to E(test)
 
 
 ```python
@@ -986,7 +986,7 @@ plt.show()
 ```
 
 
-![png](output_53_0.png)
+![png](/README_images/output_53_0.png)
 
 
 
@@ -1006,10 +1006,10 @@ plt.show()
 ```
 
 
-![png](output_54_0.png)
+![png](/README_images/output_54_0.png)
 
 
-From the graphs above it could be clearly seen that Linear Regression does a better job when it comes to fitting $E_{val}$ to be a good estimate of $E_{test}$. As the training set size becomes bigger, validation curve also becomes closer to the training curve. That means that the model has **low variance** - gap between validation and training error. However, since training error relatively high, it means that the training data is not fitted well enough by the model. In over words it means that the model has a **high bias** with respect to that set of data. This set of outcomes usually means that our algorithm **underfits the training data**. 
+From the graphs above it could be clearly seen that Linear Regression does a better job when it comes to fitting E(validation) to be a good estimate of E(test). As the training set size becomes bigger, validation curve also becomes closer to the training curve. That means that the model has **low variance** - gap between validation and training error. However, since training error relatively high, it means that the training data is not fitted well enough by the model. In over words it means that the model has a **high bias** with respect to that set of data. This set of outcomes usually means that our algorithm **underfits the training data**. 
 
 While the Logistic Regression's case is completely the opposite. Since it's training error is significantly small it means that the algorithm performs extremely good on the trainig set - has **low bias**. But at the same time the gap between the validation error and training error is almost as goodas that of the Linear Regression (aproximately 1),  meaning that the model **doesn't overfit the data**, because the gap is getting smaller and smaller. **Therefore, Logistic Regression is performing better (but takes more time!)**
 
@@ -1039,7 +1039,7 @@ print('Logistic regression best score = ', grid_log.best_score_ )
 
 The best scored of the grid search function above also show that Logistic regression performs significantly better than the Linear regression.
 
-## Task 4. KAGGLE Competition
+## 4. KAGGLE Task
 
 #### Fashon - MNIST Task
 Firstly we import the MNIST dataset
@@ -1095,15 +1095,6 @@ print("Logistic Regression score on test set =", Log_reg.score(x_test, y_test))
 print("Logistic Regression score on train set =", Log_reg.score(x_train, y_train))
 ```
 
-    C:\Users\danissa_s\anaconda3\lib\site-packages\sklearn\linear_model\_logistic.py:762: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of f AND g EVALUATIONS EXCEEDS LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      n_iter_i = _check_optimize_result(
-    
 
     Logistic Regression score on test set = 0.8383
     Logistic Regression score on train set = 0.88525
